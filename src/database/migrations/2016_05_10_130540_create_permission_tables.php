@@ -27,11 +27,12 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create($config['user_has_permissions'], function (Blueprint $table) use ($config) {
-            $table->integer('user_id')->unsigned();
+            // Adrian (2018-01-17): The application uses a varchar(20) field for the user_id
+            $table->string('user_id', 20);
             $table->integer('permission_id')->unsigned();
 
             $table->foreign('user_id')
-                ->references('id')
+                ->references('user_id')
                 ->on($config['users'])
                 ->onDelete('cascade');
 
@@ -45,7 +46,8 @@ class CreatePermissionTables extends Migration
 
         Schema::create($config['user_has_roles'], function (Blueprint $table) use ($config) {
             $table->integer('role_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            // Adrian (2018-01-17): The application uses a varchar(20) field for the user_id
+            $table->string('user_id', 20);
 
             $table->foreign('role_id')
                 ->references('id')
@@ -53,7 +55,7 @@ class CreatePermissionTables extends Migration
                 ->onDelete('cascade');
 
             $table->foreign('user_id')
-                ->references('id')
+                ->references('user_id')
                 ->on($config['users'])
                 ->onDelete('cascade');
 
