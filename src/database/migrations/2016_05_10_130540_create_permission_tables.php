@@ -31,7 +31,7 @@ class CreatePermissionTables extends Migration
             $table->string('user_id', 20);
             $table->integer('permission_id')->unsigned();
 
-            $table->foreign('user_id')
+            /**$table->foreign('user_id')
                 ->references('user_id')
                 ->on($config['users'])
                 ->onDelete('cascade');
@@ -39,7 +39,7 @@ class CreatePermissionTables extends Migration
             $table->foreign('permission_id')
                 ->references('id')
                 ->on($config['permissions'])
-                ->onDelete('cascade');
+                ->onDelete('cascade');**/
 
             $table->primary(['user_id', 'permission_id']);
         });
@@ -49,7 +49,7 @@ class CreatePermissionTables extends Migration
             // Adrian (2018-01-17): The application uses a varchar(20) field for the user_id
             $table->string('user_id', 20);
 
-            $table->foreign('role_id')
+            /**$table->foreign('role_id')
                 ->references('id')
                 ->on($config['roles'])
                 ->onDelete('cascade');
@@ -57,7 +57,7 @@ class CreatePermissionTables extends Migration
             $table->foreign('user_id')
                 ->references('user_id')
                 ->on($config['users'])
-                ->onDelete('cascade');
+                ->onDelete('cascade');**/
 
             $table->primary(['role_id', 'user_id']);
 
